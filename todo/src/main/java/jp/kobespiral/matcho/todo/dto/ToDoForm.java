@@ -1,12 +1,10 @@
 package jp.kobespiral.matcho.todo.dto;
 
 import java.util.Date;
-
 import jp.kobespiral.matcho.todo.entity.ToDo;
 import lombok.Data;
 
 @Data
-
 public class ToDoForm {
     // Long seq;
     String title;
