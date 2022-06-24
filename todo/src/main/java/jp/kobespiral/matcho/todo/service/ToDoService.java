@@ -5,12 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service; 
 
-import jp.kobespiral.matcho.todo.dto.MemberForm;
 import jp.kobespiral.matcho.todo.dto.ToDoForm;
-import jp.kobespiral.matcho.todo.entity.Member;
 import jp.kobespiral.matcho.todo.entity.ToDo;
 import jp.kobespiral.matcho.todo.exception.ToDoAppException;
-import jp.kobespiral.matcho.todo.repository.MemberRepository;
 import jp.kobespiral.matcho.todo.repository.ToDoRepository;
 
 @Service
