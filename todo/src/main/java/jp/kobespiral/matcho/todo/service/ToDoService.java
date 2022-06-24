@@ -1,5 +1,6 @@
 package jp.kobespiral.matcho.todo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class ToDoService {
      * @return
      */
     public ToDo createToDo(String mid, ToDoForm form){
-        ToDo t = form.toEntity();
+        Date date = new Date();
+        ToDo t = new ToDo(null, form.getTitle(), mid, false, date, null);
         return tRepo.save(t);
     }
 
@@ -68,5 +70,24 @@ public class ToDoService {
      */
     public List<ToDo> getDoneList(){
         return tRepo.findByDone(true);
+    }
+
+    /**
+     * ToDoを完了に変更
+     * @param seq
+     */
+    public ToDo changeToDone(Long seq){
+        Date date = new Date();
+        ToDo t = getToDo(seq);
+        t.setDone(true);
+        t.setDoneAt(date);
+        return tRepo.save(t);
+    }
+
+    public ToDo changeToDo(Long seq){
+        ToDo t = getToDo(seq);
+        t.setDone(false);
+        t.setDoneAt(null);
+        return tRepo.save(t);
     }
 }
