@@ -1,4 +1,5 @@
-package jp.kobespiral.matcho.todo.entity;//適宜変えること
+package jp.kobespiral.matcho.todo.entity;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
