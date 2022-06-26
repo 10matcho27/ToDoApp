@@ -10,4 +10,5 @@ import jp.kobespiral.matcho.todo.entity.Member;
 //Memberの出し入れ、keyはString。
 public interface MemberRepository extends CrudRepository<Member, String>{
     List<Member> findAll();
+    
 }

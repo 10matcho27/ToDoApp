@@ -67,5 +67,6 @@ public class MemberController {
    String deleteUser(@PathVariable String mid, Model model) {
        mService.deleteMember(mid);
        return showUserForm(model);
+       // return "redirect:/admin/register
    }
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo画面</title>
+</head>
+<input type="button" value="戻る" onclick="history.back()" />
+<body>
+    <h1>みんなのタスク管理</h1>
+    <table border="1">
+        <h3>ToDoリスト</h3>
+        <tr>
+            <th>　　ToDoのID　　</th>
+            <th>　　ユーザID　　</th>
+            <th>　　　ToDo　　　</th>
+            <th>　ToDo作成日時　</th>
+        </tr>
+    
+        <tr th:each="t: ${allToDos}">
+            <td>[[${t.seq}]]</td>
+            <td>[[${t.mid}]]</td>
+            <td>[[${t.title}]]</td>
+            <td>[[${t.createdAt}]]</td>
+        </tr>
+    </table>
+    <h2>Doneリスト</h2>
+    <table border="1">
+        <tr>
+            <th>終わったToDoのID</th>
+            <th>　　ユーザID　　</th>
+            <th>　終わったToDo　</th>
+            <th>　ToDo完了日時　</th>
+        </tr>
+        <tr th:each="d: ${allDones}">
+            <td>[[${d.seq}]]</td>
+            <td>[[${d.mid}]]</td>
+            <td>[[${d.title}]]</td>
+            <td>[[${d.doneAt}]]</td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
