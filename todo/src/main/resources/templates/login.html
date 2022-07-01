@@ -13,6 +13,7 @@
             <tr>
                 <td><label>メンバーID: </label></td>
                 <td><input type="text" required th:field="*{mid}" /><td>
+                    <span th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></span>
             </tr>
         </table>
         <p><input type="submit" value="確認する" /></p>

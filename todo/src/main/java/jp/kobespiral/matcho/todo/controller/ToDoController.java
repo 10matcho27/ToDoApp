@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import jp.kobespiral.matcho.todo.dto.LoginForm;
-import jp.kobespiral.matcho.todo.dto.MemberForm;
 import jp.kobespiral.matcho.todo.dto.ToDoForm;
 import jp.kobespiral.matcho.todo.entity.Member;
 import jp.kobespiral.matcho.todo.entity.ToDo;
