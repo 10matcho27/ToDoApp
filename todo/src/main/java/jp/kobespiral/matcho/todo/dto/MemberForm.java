@@ -23,11 +23,11 @@ public class MemberForm {
     @NotBlank
     @Size(min = 8)
     String password; //パスワード。暗号化済。
-    
+
     String role = "MEMBER"; //ロール。default = "MEMBER"
 
     public Member toEntity() {
-        Member m = new Member(mid, name, null, null); //後で記述
+        Member m = new Member(mid, name, password, role); //後で記述
         return m;
     }
 }

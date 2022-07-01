@@ -64,8 +64,11 @@ public class SignUpController {
      */
     @PostMapping("")
     String createMember(@ModelAttribute(name = "MemberForm") MemberForm form, Model model) {
+        System.out.println("test1");
         Member m = mService.createMember(form);
+        System.out.println("test2");
         model.addAttribute("MemberForm", m);
+        System.out.println("test3");
 
         return "signup_complete";
     }

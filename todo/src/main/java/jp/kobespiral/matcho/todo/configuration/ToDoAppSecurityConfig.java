@@ -2,7 +2,6 @@ package jp.kobespiral.matcho.todo.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +16,9 @@ import jp.kobespiral.matcho.todo.service.MemberService;
 public class ToDoAppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MemberService mService;
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
     
     @Value("${admin.pass}")
     String adminPass;
@@ -65,7 +67,7 @@ public class ToDoAppSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(mService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(mService).passwordEncoder(encoder);
         //ついでに管理者を登録しておく
         mService.registerAdmin(adminPass);
     }
@@ -74,9 +76,9 @@ public class ToDoAppSecurityConfig extends WebSecurityConfigurerAdapter {
      * アプリで共通のパスワード生成器を作る．
      * @Beanをつけているので任意の箇所でAutowired可能になる
      */
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-        return bcpe;
-    }
+    // @Bean
+    // public BCryptPasswordEncoder passwordEncoder() {
+    //     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
+    //     return bcpe;
+    // }
 }
