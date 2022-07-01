@@ -6,3 +6,5 @@ import lombok.Data;
 public class LoginForm {
     String mid;    
 }
+
+//Formにアノテーション(@varidationなど)をつけることでチェックしてくれる。
