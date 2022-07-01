@@ -30,15 +30,20 @@
     <title>ログイン画面</title>
 </head>
 <body>
+    <p></p>
     <h1>ログイン画面</h1>
+    <p></p>
     <form role="form" th:object="${LoginForm}" method="post">
-        <table border="1" class="table">
+        <br><label>メンバーID: </label>
+        <input type="text" required th:field="*{mid}" /></br>
+        <div th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></div>
+        <!-- <table border="1" class="table">
             <tr>
                 <td><label>メンバーID: </label></td>
                 <td><input type="text" required th:field="*{mid}" /><td>
-                    <span th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></span>
+                <div th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></div>
             </tr>
-        </table>
+        </table> -->
         <p><input type="submit" value="確認する" /></p>
     </form>
 </body>
