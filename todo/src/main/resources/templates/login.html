@@ -34,8 +34,9 @@
     <h1>ログイン画面</h1>
     <p></p>
     <form role="form" th:object="${LoginForm}" method="post">
-        <br><label>メンバーID: </label>
-        <input type="text" required th:field="*{mid}" /></br>
+        <br><label>メンバーID:　</label>
+        <input type="text" required th:field="*{mid}" />
+        <input type="submit" value="確認する" /></br>
         <div th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></div>
         <!-- <table border="1" class="table">
             <tr>
@@ -44,7 +45,6 @@
                 <div th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}" style="color:red"></div>
             </tr>
         </table> -->
-        <p><input type="submit" value="確認する" /></p>
     </form>
 </body>
 </html>
