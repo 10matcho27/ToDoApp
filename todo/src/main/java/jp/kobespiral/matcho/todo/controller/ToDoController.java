@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,21 +45,27 @@ public class ToDoController {
    }
 
    @GetMapping("/{mid}/list")
-   public String showList(@PathVariable String mid, Model model){
+   public String showList(@ModelAttribute(name = "ToDoForm") ToDoForm form, @PathVariable String mid, Model model){
       Member m = mService.getMember(mid);
       List<ToDo> toDos = tService.getToDoList(mid);
       List<ToDo> dones = tService.getDoneList(mid);
-      ToDoForm form = new ToDoForm();
       model.addAttribute("toDos", toDos);
       model.addAttribute("dones", dones);
       model.addAttribute("member", m);
       model.addAttribute("ToDoForm", form);
       return "list";
+      // return showList(form, mid, model);
    }
 
    @PostMapping("/{mid}/list/add_toDo")
-   public String addToDo(@PathVariable String mid, @ModelAttribute(name = "ToDoForm") ToDoForm form, Model model){
+   public String addToDo(@Validated @PathVariable String mid, @ModelAttribute(name = "ToDoForm") ToDoForm form, Model model){
       ToDo t = tService.createToDo(mid, form);
+      // return "redirect:/" + mid + "/list";
+   //    if (bindingResult.hasErrors()) {
+   //       // GETリクエスト用のメソッドを呼び出して、ユーザー登録画面に戻る
+   //       return showList(form, mid, model);
+   //   }
+      // return showList(form, mid, model);
       return "redirect:/" + mid + "/list";
    }
    

@@ -90,4 +90,20 @@ public class ToDoService {
         t.setDoneAt(null);
         return tRepo.save(t);
     }
+
+    public ToDo done(String mid, Long seq){
+        return changeToDone(seq);
+    }
+
+    public ToDo updateToDo(String mid, Long seq, ToDoForm form){
+        ToDo t = getToDo(seq);
+        t.setTitle(form.getTitle());
+        return tRepo.save(t);
+    }
+
+    public ToDo deleteToDo(String mid, Long seq){
+        ToDo t = getToDo(seq);
+        tRepo.delete(t);
+        return t;
+    }
 }
