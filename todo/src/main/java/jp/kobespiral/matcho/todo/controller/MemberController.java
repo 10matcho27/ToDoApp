@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import jp.kobespiral.matcho.todo.dto.MemberForm;
 import jp.kobespiral.matcho.todo.entity.Member;
 import jp.kobespiral.matcho.todo.service.MemberService;
@@ -25,15 +26,14 @@ public class MemberController {
     * @param model
     * @return
     */
-   @GetMapping("/register")
-   String showUserForm(Model model) {
-       List<Member> members = mService.getAllMembers();
-       model.addAttribute("members", members);
-       MemberForm form = new MemberForm();
-       model.addAttribute("MemberForm", form);
-       
-       return "register";
-   }
+    @GetMapping("/register")
+    String showUserForm(@ModelAttribute MemberForm form, Model model) {
+        List<Member> members = mService.getAllMembers();
+        model.addAttribute("members", members);
+        model.addAttribute("MemberForm", form);
+
+        return "register";
+    }
    /**
     * 管理者用・ユーザ登録確認ページを表示 HTTP-POST /admin/check
     * @param form
@@ -41,7 +41,12 @@ public class MemberController {
     * @return
     */
    @PostMapping("/check") 
-   String checkUserForm(@ModelAttribute(name = "MemberForm") MemberForm form,  Model model) {
+   String checkUserForm(@Validated @ModelAttribute(name = "MemberForm") MemberForm form, BindingResult bindingResult, Model model) {
+       //入力チェックに引っかかった場合、ユーザ登録画面に戻る。
+       if(bindingResult.hasErrors()) {
+        //GETリクエスト用のメゾット呼び出して、ユーザ登録画面を表示する。
+           return showUserForm(form, model);
+       }
        model.addAttribute("MemberForm", form);
        return "check";
    }
@@ -64,9 +69,9 @@ public class MemberController {
     * @return
     */
    @GetMapping("/delete/{mid}")
-   String deleteUser(@PathVariable String mid, Model model) {
+   String deleteUser(@ModelAttribute(name = "MemberForm") MemberForm form,@PathVariable String mid, Model model) {
        mService.deleteMember(mid);
-       return showUserForm(model);
+       return showUserForm(form, model);
        // return "redirect:/admin/register
    }
 }

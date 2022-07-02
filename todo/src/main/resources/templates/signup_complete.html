@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap, <head>の中に以下のcss,jsを入れる -->
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -21,14 +21,19 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <title>登録確認</title>
+    <!--                                           -->
+
+    <meta charset="UTF-8">
+    <title>登録完了</title>
 </head>
+
 <body>
-    <h1>登録確認</h1>
+    <h1>登録完了</h1>
     <p>
-        以下の情報でメンバーを登録します．よろしければ登録を押してください．
+        メンバー登録を完了しました．
     </p>
-    <form role="form" th:action="@{/admin/register}" th:object="${MemberForm}" method="post">
+
+    <div th:object="${MemberForm}">
         <p>
             <label>メンバーID: </label>
             [[*{mid}]]
@@ -38,11 +43,9 @@
             [[*{name}]]
         </p>
         <p>
-            <input type="button" value="戻る" onclick="history.back()" />
-            <input type="submit" value="登録する" />
+            <a th:href=@{/}>初めに戻る</a>
         </p>
-        <input type="hidden" th:field="*{mid}" />
-        <input type="hidden" th:field="*{name}" />
-    </form>
+    </div>
 </body>
+
 </html>
